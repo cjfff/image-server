@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-09-19 11:54:36
- * @LastEditTime: 2021-09-19 17:18:19
+ * @LastEditTime: 2021-09-21 20:17:24
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /egg-poster-generator-server/app/controller/image.ts
@@ -11,9 +11,11 @@ import { Controller } from 'egg';
 export default class ImageController extends Controller {
   public async generatorImage() {
     const { ctx } = this;
-    const image = await ctx.service.image.generatorImage(ctx.request.query.name);
+    const { name = 'cjfff' } = ctx.request.query;
+    const image = await ctx.service.image.generatorImage(name);
 
-    ctx.headers['content-type'] = 'image/png';
+    ctx.set('Content-type', 'image/png');
+    ctx.set('Content-disposition', `attachment; filename=${name}.png`);
     ctx.body = image;
   }
 }
