@@ -1,0 +1,38 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-09-19 12:01:38
+ * @LastEditTime: 2021-09-19 12:08:21
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: /egg-poster-generator-server/app/view/user.ejs
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>poster</title>
+</head>
+<style>
+  .poster {
+    height: 200px;
+    width: 200px;
+    background-color: palegoldenrod;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .poster .name {
+    font-size: 18px;
+  }
+</style>
+<body>
+  <div class="poster">
+    <span class="name"><%= user %></span>
+  </div>
+</body>
+
+</html>
