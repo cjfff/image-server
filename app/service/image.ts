@@ -7,7 +7,7 @@
  * @FilePath: /egg-poster-generator-server/app/service/image.ts
  */
 import { Service } from 'egg';
-import * as nodeHtmlToImage from 'node-html-to-image';
+import nodeHtmlToPdfOrImage from '../util/pdf';
 
 export default class Image extends Service {
 
@@ -16,11 +16,30 @@ export default class Image extends Service {
       viewEngine: 'ejs',
     });
 
-    const image = await (nodeHtmlToImage as any)({
+    const image = await (nodeHtmlToPdfOrImage as any)({
       html,
       selector: '.poster',
     });
 
     return image;
+  }
+
+  public async generatorWaybill(length = 1) {
+    const realLength = typeof length === 'number' && length > 0 ? length : 1;
+
+    const html = await this.ctx.renderView('waybill.ejs', { waybills: Array.from({ length: realLength }, (_, i) => i) }, {
+      viewEngine: 'ejs',
+    });
+
+    const pdf = await (nodeHtmlToPdfOrImage as any)({
+      html,
+      pdf: true,
+      selector: '#app',
+      puppeteerArgs: {
+        fullPage: true,
+      },
+    });
+
+    return pdf;
   }
 }

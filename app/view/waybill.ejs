@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <style>
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+
+      padding: 0;
+      margin: 0;
+      background: #FAFAFA;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    .waybill {
+      width: 1185px;
+      border: 4px solid #000;
+      color: #000;
+      line-height: 1;
+      margin-bottom: 100px;
+    }
+
+    .waybill-border-bottom {
+      border-bottom: 2px solid #000;
+    }
+
+    .waybill-border-right {
+      border-right: 2px solid #000;
+    }
+
+    .header {
+      display: flex;
+    }
+
+    .header-l {
+      width: 230px;
+      border-right: 2px solid #000;
+    }
+
+    .header-l-oneship {
+      width: 190px;
+      font-size: 20px;
+      border-bottom: 2px dashed #000;
+      padding-bottom: 10px;
+      text-align: center;
+      margin: 20px 0 0 12px;
+    }
+
+    .header-l-custom {
+      height: 220px;
+      display: flex;
+      align-items: center;
+    }
+
+    .header-l-custom-logo {
+      text-align: center;
+      font-size: 20px;
+      width: 202px;
+    }
+
+    .header-r {
+      width: 955px;
+      text-align: center;
+      padding: 26px 0 0 0;
+    }
+
+    .header-r-text {
+      font-size: 29px;
+      font-weight: 500;
+    }
+
+
+    .header-r-order-id {
+      display: inline-block;
+      margin-left: 100px;
+    }
+
+    /* ========== code ========= */
+
+    .code {
+      height: 157px;
+      line-height: 157px;
+      text-align: center;
+      font-size: 108px;
+      font-weight: 500;
+      color: #000;
+    }
+
+    /* ======== address =========== */
+
+    .address-wrap {
+      display: flex;
+      height: 298px;
+    }
+
+    .address-item {
+      padding: 16px;
+      width: 592px
+    }
+
+    .address-item+.address-item {
+      border-left: 2px solid #000;
+    }
+
+    .address-header {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .address-target {
+      font-size: 23px;
+      font-weight: 400;
+    }
+
+    .address-country {
+      font-size: 29px;
+      margin-top: 8px;
+      font-weight: 500;
+    }
+
+    .address-content {
+      font-weight: 500;
+      font-size: 29px;
+    }
+
+    .address-phone {
+      margin-bottom: 14px;
+    }
+
+    /* ========= payment ======== */
+
+
+    .payment-wrap {
+      display: flex;
+      height: 357px;
+    }
+
+    .payment-left {
+      width: 475px;
+      flex: 0 0 475px;
+      border-right: 2px solid #000;
+    }
+
+    .payment-left-item {
+      padding: 19px 0 0 30px;
+      height: 178px;
+    }
+
+    .payment-left-item+.payment-left-item {
+      border-top: 2px solid #000;
+    }
+
+    .payment-title {
+      font-size: 30px;
+      font-weight: 500;
+      margin-bottom: 24px;
+      line-height: 1;
+      text-align: left;
+    }
+
+    .payment-title-absolute {
+      position: absolute;
+      left: 19px;
+      top: 19px;
+    }
+
+    .payment-left-content {
+      font-size: 83px;
+      font-weight: 500;
+    }
+
+    .payment-center {
+      position: relative;
+      padding: 20px;
+      flex: 0 0 355px;
+      width: 355px;
+      line-height: 357px;
+      text-align: center;
+      font-weight: 500;
+      font-size: 117px;
+    }
+
+
+    .payment-right {
+      position: relative;
+      padding: 19px;
+      flex: 1;
+      line-height: 357px;
+      text-align: center;
+      font-weight: 500;
+      font-size: 83px;
+    }
+
+
+    /* =========== 订单详情 ============= */
+    .order-detail-wrap {
+      height: 675px;
+      display: flex;
+    }
+
+    .order-detail-left {
+      padding: 16px;
+      width: 710px;
+      height: 100%;
+    }
+
+    .order-detail-left-header {
+      font-size: 21px;
+      display: flex;
+      justify-content: space-between;
+      font-weight: 500;
+      margin-bottom: 22px;
+    }
+
+    .order-detail-left-content {
+      font-size: 29px;
+      font-weight: 500;
+    }
+
+    .order-detail-r {
+      flex: 1;
+      height: 100%;
+    }
+
+    .order-detail-r-item {
+      height: 239px;
+      font-size: 29px;
+      font-weight: 500;
+      padding: 16px;
+    }
+
+    .order-detail-r-title {
+      font-size: 21px;
+      font-weight: 500;
+      margin-bottom: 30px;
+    }
+
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <% waybills.forEach(function(waybill){ %>
+    <%- include('waybillItem', {waybill: waybill}); %>
+    <% }); %>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/barcodes/JsBarcode.code128.min.js"></script>
+  <script>
+    JsBarcode("#barcode", "LST5022367600166317135", {
+      width: 4,
+      height: 206,
+      displayValue: false,
+    }, 100)
+
+  </script>
+</body>
+
+</html>
